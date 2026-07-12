@@ -1,0 +1,332 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Brand palette (constant) ── */
+@theme {
+  --color-charcoal: #0F172A;
+  --color-charcoal-light: #1E293B;
+  --color-charcoal-muted: #334155;
+  --color-emerald-brand: #10B981;
+  --color-emerald-dark: #059669;
+  --color-cyan-soft: #22D3EE;
+  --color-amber-warm: #F59E0B;
+  --color-offwhite: #F8FAFC;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Semantic tokens — wired to CSS variables below */
+  --color-surface: var(--vb-surface);
+  --color-surface-elevated: var(--vb-surface-elevated);
+  --color-surface-muted: var(--vb-surface-muted);
+  --color-surface-inset: var(--vb-surface-inset);
+  --color-foreground: var(--vb-foreground);
+  --color-foreground-muted: var(--vb-foreground-muted);
+  --color-foreground-subtle: var(--vb-foreground-subtle);
+  --color-border: var(--vb-border);
+  --color-border-strong: var(--vb-border-strong);
+  --color-sidebar: var(--vb-sidebar);
+  --color-sidebar-text: var(--vb-sidebar-text);
+  --color-sidebar-muted: var(--vb-sidebar-muted);
+  --color-sidebar-border: var(--vb-sidebar-border);
+  --color-sidebar-active: var(--vb-sidebar-active);
+  --color-overlay: var(--vb-overlay);
+  --color-shadow: var(--vb-shadow);
+}
+
+/* ── Light theme (default) ── */
+:root,
+.light {
+  --vb-surface: #F1F5F9;
+  --vb-surface-elevated: #FFFFFF;
+  --vb-surface-muted: #F8FAFC;
+  --vb-surface-inset: #E2E8F0;
+  --vb-foreground: #0F172A;
+  --vb-foreground-muted: #475569;
+  --vb-foreground-subtle: #64748B;
+  --vb-border: #E2E8F0;
+  --vb-border-strong: #CBD5E1;
+  --vb-sidebar: #0F172A;
+  --vb-sidebar-text: #F8FAFC;
+  --vb-sidebar-muted: #94A3B8;
+  --vb-sidebar-border: rgba(255, 255, 255, 0.08);
+  --vb-sidebar-active: rgba(16, 185, 129, 0.2);
+  --vb-overlay: rgba(15, 23, 42, 0.45);
+  --vb-shadow: rgba(15, 23, 42, 0.08);
+  color-scheme: light;
+}
+
+/* ── Dark theme ── */
+.dark {
+  --vb-surface: #0B1220;
+  --vb-surface-elevated: #151D2E;
+  --vb-surface-muted: #1A2332;
+  --vb-surface-inset: #0F172A;
+  --vb-foreground: #F1F5F9;
+  --vb-foreground-muted: #CBD5E1;
+  --vb-foreground-subtle: #94A3B8;
+  --vb-border: #1E293B;
+  --vb-border-strong: #334155;
+  --vb-sidebar: #080E1A;
+  --vb-sidebar-text: #F1F5F9;
+  --vb-sidebar-muted: #64748B;
+  --vb-sidebar-border: rgba(255, 255, 255, 0.06);
+  --vb-sidebar-active: rgba(16, 185, 129, 0.15);
+  --vb-overlay: rgba(0, 0, 0, 0.65);
+  --vb-shadow: rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--vb-surface);
+  color: var(--vb-foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Glass surfaces ── */
+.glass {
+  background: color-mix(in srgb, var(--vb-surface-elevated) 78%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--vb-border) 80%, transparent);
+}
+
+.glass-dark {
+  background: color-mix(in srgb, var(--vb-sidebar) 90%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--vb-sidebar-border);
+}
+
+/* ── Background mesh ── */
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(16, 185, 129, 0.1), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(34, 211, 238, 0.08), transparent),
+    radial-gradient(ellipse 50% 30% at 60% 80%, rgba(245, 158, 11, 0.06), transparent),
+    var(--vb-surface);
+}
+
+.dark .gradient-mesh {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(16, 185, 129, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(34, 211, 238, 0.06), transparent),
+    radial-gradient(ellipse 50% 30% at 60% 80%, rgba(245, 158, 11, 0.04), transparent),
+    var(--vb-surface);
+}
+
+/* ── Card interactions ── */
+.card-hover {
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px -12px var(--vb-shadow);
+}
+
+.interactive {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive:hover {
+  transform: translateY(-1px);
+}
+
+.interactive:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ── Skeleton loading ── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--vb-surface-inset) 25%,
+    var(--vb-surface-muted) 50%,
+    var(--vb-surface-inset) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* ── Theme toggle glow ── */
+.theme-toggle:hover {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--color-emerald-brand) 25%, transparent);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vb-border-strong);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vb-foreground-subtle);
+}
+
+/* ── Focus ring (WCAG) ── */
+:focus-visible {
+  outline: 2px solid var(--color-emerald-brand);
+  outline-offset: 2px;
+}
+
+/* ── Table row hover ── */
+.table-row-hover {
+  transition: background-color 0.15s ease;
+}
+
+.table-row-hover:hover {
+  background-color: var(--vb-surface-muted);
+}
+
+/* ── Auth pages (no page scroll) ── */
+html:has(.auth-shell) {
+  overflow: hidden;
+  height: 100%;
+}
+
+html:has(.auth-shell) body {
+  overflow: hidden;
+  height: 100%;
+}
+
+.auth-panel {
+  background: var(--vb-surface);
+}
+
+.auth-hero {
+  background: linear-gradient(145deg, #0a1020 0%, #0f172a 45%, #0c1a2e 100%);
+}
+
+.auth-card {
+  background: var(--vb-surface-elevated);
+  border: 1px solid var(--vb-border);
+  border-radius: 1.25rem;
+  padding: 1.75rem 1.5rem;
+  box-shadow:
+    0 4px 24px -4px var(--vb-shadow),
+    0 0 0 1px color-mix(in srgb, var(--vb-border) 50%, transparent);
+}
+
+@media (min-width: 640px) {
+  .auth-card {
+    padding: 2rem 2.25rem;
+  }
+}
+
+.dark .auth-card {
+  box-shadow:
+    0 8px 32px -8px rgba(0, 0, 0, 0.5),
+    0 0 0 1px var(--vb-border);
+}
+
+.auth-field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--vb-foreground-muted);
+  margin-bottom: 0.375rem;
+}
+
+.auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 0.75rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--vb-foreground-subtle);
+  pointer-events: none;
+}
+
+.auth-input-wrap input,
+.auth-input-wrap select {
+  width: 100%;
+  padding: 0.625rem 0.75rem 0.625rem 2.5rem;
+  font-size: 0.875rem;
+  color: var(--vb-foreground);
+  background: var(--vb-surface-muted);
+  border: 1px solid var(--vb-border);
+  border-radius: 0.625rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.auth-input-wrap input::placeholder {
+  color: var(--vb-foreground-subtle);
+}
+
+.auth-input-wrap input:focus,
+.auth-input-wrap select:focus {
+  border-color: var(--color-emerald-brand);
+  background: var(--vb-surface-elevated);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-emerald-brand) 18%, transparent);
+}
+
+.auth-input-wrap select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}

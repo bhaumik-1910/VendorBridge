@@ -1,0 +1,18 @@
+export const queryKeys = {
+  auth: ['auth', 'me'],
+  dashboard: ['dashboard'],
+  vendors: (params) => ['vendors', params],
+  vendor: (id) => ['vendors', id],
+  rfqs: (params) => ['rfqs', params],
+  rfq: (id) => ['rfqs', id],
+  quotations: (params) => ['quotations', params],
+  quotationCompare: (rfqId) => ['quotations', 'compare', rfqId],
+  approvals: (params) => ['approvals', params],
+  purchaseOrders: (params) => ['purchase-orders', params],
+  purchaseOrder: (id) => ['purchase-orders', id],
+  invoices: (params) => ['invoices', params],
+  invoice: (id) => ['invoices', id],
+  notifications: (params) => ['notifications', params],
+  activity: (params) => ['activity', params],
+  reports: (params) => ['reports', params],
+};
