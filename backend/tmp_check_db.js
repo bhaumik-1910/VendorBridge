@@ -5,7 +5,7 @@ const { RFQ, Quotation } = require('../src/models');
 
 const checkData = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://bhaumikkothiya:Bhaumik1910@cluster0.edp4acr.mongodb.net/vendorbridge?retryWrites=true&w=majority&appName=Cluster0');
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://[YOUR_NAME]:[PASSWORD]@cluster0.edp4acr.mongodb.net/vendorbridge?retryWrites=true&w=majority&appName=Cluster0');
         console.log('Connected to DB');
 
         const rfqs = await RFQ.find({ isDeleted: false });

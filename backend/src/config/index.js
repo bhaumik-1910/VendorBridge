@@ -4,7 +4,7 @@ module.exports = {
   env: process.env.NODE_ENV || 'development',
   port: parseInt(process.env.PORT, 10) || 5000,
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
-  mongoUri: process.env.MONGODB_URI || 'mongodb+srv://bhaumikkothiya:Bhaumik1910@cluster0.edp4acr.mongodb.net/vendorbridge?retryWrites=true&w=majority&appName=Cluster0',
+  mongoUri: process.env.MONGODB_URI || 'mongodb+srv://[YOUR_NAME]:[PASSWORD]@cluster0.edp4acr.mongodb.net/vendorbridge?retryWrites=true&w=majority&appName=Cluster0',
   jwt: {
     accessSecret: process.env.JWT_ACCESS_SECRET || (() => {
       if (process.env.NODE_ENV === 'production') console.error('CRITICAL: JWT_ACCESS_SECRET is not set in production!');
