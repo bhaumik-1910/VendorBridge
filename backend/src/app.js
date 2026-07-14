@@ -51,6 +51,11 @@ app.use(morgan(config.env === 'development' ? 'dev' : 'combined'));
 // Static uploads
 app.use('/uploads', express.static(path.join(process.cwd(), config.upload.path)));
 
+// Root route success check
+app.get('/', (req, res) => {
+  res.json({ success: true, message: 'VendorBridge Backend API is running successfully!' });
+});
+
 // API routes
 app.use('/api/v1', routes);
 
