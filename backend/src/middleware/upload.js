@@ -5,10 +5,14 @@ const config = require('../config');
 const { AppError } = require('../utils/ApiResponse');
 
 const uploadDir = path.join(process.cwd(), config.upload.path);
-['vendors', 'rfqs', 'quotations', 'invoices'].forEach((dir) => {
-  const full = path.join(uploadDir, dir);
-  if (!fs.existsSync(full)) fs.mkdirSync(full, { recursive: true });
-});
+try {
+  ['vendors', 'rfqs', 'quotations', 'invoices'].forEach((dir) => {
+    const full = path.join(uploadDir, dir);
+    if (!fs.existsSync(full)) fs.mkdirSync(full, { recursive: true });
+  });
+} catch (e) {
+  console.warn('Upload directory creation skipped (read-only filesystem):', e.message);
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

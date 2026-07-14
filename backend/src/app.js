@@ -44,8 +44,12 @@ app.use((req, res, next) => {
 app.use(xss());
 
 // Logging
-const logDir = path.join(process.cwd(), 'logs');
-if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+try {
+  const logDir = path.join(process.cwd(), 'logs');
+  if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+} catch (e) {
+  console.warn('Logging directory creation skipped (read-only filesystem):', e.message);
+}
 app.use(morgan(config.env === 'development' ? 'dev' : 'combined'));
 
 // Static uploads
