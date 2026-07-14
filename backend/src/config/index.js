@@ -25,8 +25,8 @@ module.exports = {
     enabled: process.env.SMTP_ENABLED !== 'false',
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT, 10) || 587,
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: process.env.SMTP_USER || process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASS || process.env.SMTP_PASSWORD,
     from: process.env.EMAIL_FROM || 'VendorBridge <noreply@vendorbridge.com>',
   },
   upload: {
